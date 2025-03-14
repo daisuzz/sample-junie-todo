@@ -10,8 +10,10 @@ const TodoForm: React.FC<TodoFormProps> = ({ addTodo }) => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    addTodo(text);
-    setText('');
+    if (text.trim() !== '') {
+      addTodo(text);
+      setText('');
+    }
   };
 
   return (
