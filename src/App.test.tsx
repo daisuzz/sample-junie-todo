@@ -21,14 +21,22 @@ Object.defineProperty(window, 'localStorage', { value: localStorageMock });
 
 // Mock react-beautiful-dnd
 jest.mock('react-beautiful-dnd', () => ({
-  DragDropContext: ({ children }) => children,
-  Droppable: ({ children }) => 
+  DragDropContext: ({ children }: { children: React.ReactNode }) => children,
+  Droppable: ({ children }: { children: (provided: {
+    innerRef: (element: HTMLElement | null) => void;
+    droppableProps: Record<string, any>;
+    placeholder: React.ReactNode;
+  }) => React.ReactElement }) => 
     children({
       innerRef: jest.fn(),
       droppableProps: {},
       placeholder: null,
     }),
-  Draggable: ({ children }) => 
+  Draggable: ({ children }: { children: (provided: {
+    innerRef: (element: HTMLElement | null) => void;
+    draggableProps: Record<string, any>;
+    dragHandleProps: Record<string, any> | null;
+  }) => React.ReactElement }) => 
     children({
       innerRef: jest.fn(),
       draggableProps: {},
